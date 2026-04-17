@@ -1,10 +1,8 @@
 # Snake Game
 
-A modern, responsive Snake Game built with vanilla **HTML, CSS, and JavaScript** — no frameworks, no build step, no dependencies.
+A modern, responsive Snake Game built with **React + JavaScript + Vite**.
 
 **Live demo:** https://ngys9919.github.io/ti-claude-code/
-
-![Snake Game](screenshot.png)
 
 ![Start screen](ti-claude-code-start-game.png)
 
@@ -16,56 +14,59 @@ A modern, responsive Snake Game built with vanilla **HTML, CSS, and JavaScript**
 - Progressive difficulty — speed increases every 50 points
 - Pause / Resume and Restart controls
 - Game Over overlay with final score
-- Multi-input support:
-  - **Keyboard**: Arrow keys or `W` `A` `S` `D`
-  - **Pause**: `P` or `Space`
-  - **Mobile**: on-screen directional buttons and swipe gestures on the canvas
 
 ![Game over screen](ti-claude-code-game-over.png)
 
+## Controls
+
+- **Keyboard**: Arrow keys or `W` `A` `S` `D` to move
+- **Pause**: `P` or `Space` (Space also starts / restarts)
+- **Touch**: on-screen directional buttons (shown on small screens)
+- **Swipe**: swipe on the canvas to turn
+
 ## Getting Started
 
-No install, no build. Just open the game in a browser.
+### Prerequisites
 
-### Option 1 — Open directly
+- [Node.js](https://nodejs.org/) 20 or newer
 
-Double-click [index.html](index.html) or drag it into any modern browser.
-
-### Option 2 — Serve locally
-
-Any static server works. For example, with Python:
+### Install and run
 
 ```bash
-python -m http.server 8000
+npm install
+npm run dev
 ```
 
-Then visit http://localhost:8000.
+Then visit http://localhost:5173.
 
-## Project Structure
+### Production build
+
+```bash
+npm run build      # outputs to dist/
+npm run preview    # serves the built dist/ locally
+```
+
+## Files
 
 ```
-index.html   — markup, scoreboard, canvas, overlay, controls
-style.css    — dark neon theme, responsive layout, mobile touch UI
-script.js    — all game logic (state machine, game loop, input, rendering)
+index.html            — Vite entry (mounts React into #root)
+src/main.jsx          — React entry point
+src/App.jsx           — the game component (engine + UI)
+src/style.css         — dark neon theme, responsive layout, mobile touch UI
+vite.config.js        — Vite config (base: './' for GitHub Pages)
 ```
 
-## How It Works
-
-- **Grid model**: positions are stored as `{x, y}` cell coordinates; the renderer multiplies by `CELL` size when drawing.
-- **Game loop**: `setInterval` drives ticks; the interval is recomputed from `level` each time the level changes.
-- **Input buffering**: key presses update `nextDirection`, which the loop copies into `direction` on each tick — this prevents accidental self-reversal from rapid key presses.
-- **State machine**: `idle → running ⇄ paused → over`, with transitions centralised in `startGame` / `pauseGame` / `endGame`.
-- **Persistence**: high score is saved in `localStorage` under the key `snakeHighScore`.
+All game logic lives in [src/App.jsx](src/App.jsx). The tick loop, canvas drawing, and direction buffer run imperatively inside a mount-time `useEffect` (to avoid a re-render every 60–150 ms frame); only score / level / best / overlay are React state. See [CLAUDE.md](CLAUDE.md) for the full architecture notes.
 
 ## Deployment
 
-Automatically deployed to **GitHub Pages** on every push to `main` via [.github/workflows/deploy.yml](.github/workflows/deploy.yml).
+Automatically deployed to **GitHub Pages** on every push to `main` via [.github/workflows/deploy.yml](.github/workflows/deploy.yml). The workflow runs `npm ci && npm run build` and publishes `dist/`.
 
-To enable it on a fork:
+To enable on a fork:
 
 1. Go to **Settings → Pages**
 2. Set **Source** to **GitHub Actions**
-3. Push to `main` — the workflow publishes the repo root as the Pages site.
+3. Push to `main` — the workflow builds and publishes the site.
 
 ## License
 
