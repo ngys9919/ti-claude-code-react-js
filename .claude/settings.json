@@ -4,7 +4,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "mcp__playwright__browser_press_key",
       "mcp__playwright__browser_snapshot",
-      "mcp__playwright__browser_click"
+      "mcp__playwright__browser_click",
+      "WebFetch(domain:github.com)"
     ]
   }
 }
