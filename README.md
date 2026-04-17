@@ -4,6 +4,8 @@ A modern, responsive Snake Game built with **React + JavaScript + Vite**.
 
 **Live demo:** https://ngys9919.github.io/ti-claude-code/
 
+![Snake Game](screenshot.png)
+
 ![Start screen](ti-claude-code-start-game.png)
 
 ## Features
