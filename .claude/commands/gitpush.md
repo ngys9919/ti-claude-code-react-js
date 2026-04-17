@@ -20,7 +20,7 @@ Run the following three steps in order. Each step ends with its own commit + pus
    - Project title and one-line description
    - How to run locally (open `index.html` or `python -m http.server`)
    - Controls (keyboard, touch, swipe)
-   - Live demo link: `https://ngys9919.github.io/ti-claude-code/`
+   - Live demo link: `https://ngys9919.github.io/ti-claude-code-react-js/`
    - A short "Files" section
 3. Do NOT add a screenshot reference yet — that's Step 3.
 4. Commit with a message like `docs: add README` and `git push origin main`.
